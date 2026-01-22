@@ -7,11 +7,13 @@
   height: 100vh;
 }
 
+/* header */
 .main-chat-container > .main-chat-header{
   width: 100%;
   height: var(--header-height);
   background-color: #ffffff;
 }
+
 
 .main-chat-container > .messages-display{
   height: calc(100vh - var(--header-height) - var(--form-height));
@@ -22,4 +24,3 @@
   height: var(--form-height);
   background-color: #DDDDDD;
 }
-

@@ -6,12 +6,6 @@
   width: var(--side-bar-width);
 }
 
-.side-bar-main{
-  background-color: #2F3E51;
-  width: 100%;
-  height: calc(100vh - var(--header-height));
-}
-
 /* サイドバーヘッダー */
 
 .side-bar-header{
@@ -41,4 +35,23 @@
   border: 1px solid lightblue;
   font-size: 10x;
   padding: 14px;
+}
+
+/* サイドバーメイン */
+.side-bar-main{
+  background-color: #2F3E51;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  
+}
+
+.rooms-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.room-name {
+  margin: 20px 20px 40px 20px;
+  color: white;
 }
