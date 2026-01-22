@@ -11,7 +11,16 @@
     <div th:replace="~{messages_block :: messages_block}"></div>
   </div>
   <div class="chat-form">
-
+    <form th:action="@{/}" th:method="post" class="form">
+      <div class="form-input">
+        <input type="text" placeholder="type a message" class="form-message" />
+        <label>
+          <span class="img-file" type="button">画像</span>
+          <input type="file" style="display: none;"/>
+        </label>
+      </div>
+      <input class="form-submit" type="submit" value="送信">  
+    </form>
   </div>
 </div>
 </html>
