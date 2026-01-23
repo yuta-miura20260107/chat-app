@@ -1,5 +1,7 @@
 package in.tech_camp.chat_app.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +47,10 @@ public class UserService {
         .build();
 
     userRepository.update(user);
+  }
+
+  public List<UserEntity> getSelectUsers(Integer userId) {
+    var users = userRepository.findAllExcept(userId);
+    return users;
   }
 }

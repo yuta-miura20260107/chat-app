@@ -1,5 +1,7 @@
 package in.tech_camp.chat_app.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -23,4 +25,7 @@ public interface UserRepository {
   
   @Update("UPDATE users SET name = #{name}, email = #{email} WHERE id = #{id}")
   public int update(UserEntity userEntity);
+  
+  @Select("SELECT * FROM users WHERE id <> #{excludedId}")
+  List<UserEntity> findAllExcept(Integer excludedId);
 }
