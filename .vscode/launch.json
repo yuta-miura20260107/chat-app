@@ -7,7 +7,7 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "in.tech_camp.chat_app.ChatAppApplication",
       "projectName": "chat-app",
-      "args": "",
+      "args": "--debug",
       "envFile": "${workspaceFolder}/.env"
     }
   ]
