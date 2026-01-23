@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import in.tech_camp.chat_app.entity.UserEntity;
 
@@ -19,4 +20,7 @@ public interface UserRepository {
   
   @Select("SELECT id, name, email, password FROM users WHERE email = #{email} LIMIT 1")
   public UserEntity findByEmail(String email);
+  
+  @Update("UPDATE users SET name = #{name}, email = #{email} WHERE id = #{id}")
+  public int update(UserEntity userEntity);
 }

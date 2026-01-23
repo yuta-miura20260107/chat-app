@@ -1,5 +1,6 @@
 package in.tech_camp.chat_app.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.tech_camp.chat_app.custom_user.CustomUserDetail;
 import in.tech_camp.chat_app.form.LoginForm;
+import in.tech_camp.chat_app.form.UserEditForm;
 import in.tech_camp.chat_app.form.UserForm;
 import in.tech_camp.chat_app.service.UserService;
 import lombok.AllArgsConstructor;
+
 
 
 @Controller
@@ -31,7 +35,7 @@ public class UserController {
   
   @GetMapping("/login")
   public String loginWithError(
-    @RequestParam(value = "error") String error,
+      @RequestParam(value = "error") String error,
       @ModelAttribute("loginForm") LoginForm loginForm,
       Model model
   ) {
@@ -49,16 +53,59 @@ public class UserController {
   }
 
   @PostMapping("/user")
-  public String postMethodName(
+  public String registerUser(
       @ModelAttribute("userForm") @Validated UserForm userForm,
-      BindingResult result
+      BindingResult result,
+      Model model
   ) {
     
-    // TODO: バリデーション処理を入れる
-    // TODO: ユーザーの登録済み確認
+    if(result.hasErrors()) {
+      model.addAttribute("errorMessages", result.getAllErrors());
+      
+      UserForm form = new UserForm();
+      model.addAttribute("userForm", form);
+      return "users/sign_up";
+    }
 
     userService.registerUser(userForm);
     
+    return "redirect:/";
+  }
+  
+  @GetMapping("/users/edit")
+  public String postMethodName(
+      @AuthenticationPrincipal CustomUserDetail currentUser,
+      Model model
+  ) {
+    UserEditForm form = userService.getUserEditInitialData(currentUser);
+    model.addAttribute("user", form);
+    return "users/edit";
+  }
+
+  @PostMapping("/users/{id}")
+  public String updateUser(
+      @AuthenticationPrincipal CustomUserDetail currentUser,
+      @ModelAttribute("user") @Validated UserEditForm userEditForm,
+      BindingResult result, 
+      Model model
+  ) {
+    // IDが改竄
+    if(!userEditForm.getId().equals(currentUser.getId())) {
+      model.addAttribute("error", "不正なリクエストです。");
+      UserEditForm form = userService.getUserEditInitialData(currentUser);
+      model.addAttribute("user", form);
+      return "users/edit";
+    }
+
+    // エラーを取得
+    if(result.hasErrors()){
+      model.addAttribute("errorMessages", result.getAllErrors());
+      UserEditForm form = userService.getUserEditInitialData(currentUser);
+      model.addAttribute("user", form);
+      return "users/edit";
+    }
+
+    userService.updateUser(userEditForm);
     return "redirect:/";
   }
 }

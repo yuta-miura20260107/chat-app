@@ -3,7 +3,7 @@
 <div th:fragment="side_bar" class="side-bar-container">
   <div class="side-bar-wrapper">
     <div class="side-bar-header">
-      <div class="user-name"><div class="content">Tom</div></div>
+      <div class="user-name"><a class="content" th:text="${currentUserName}" th:href="@{/users/edit}">Tom</a></div>
       <div class="create-chat">
         <button class="create-chat-btn">チャットを作成する</button>
       </div>

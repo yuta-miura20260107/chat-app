@@ -27,6 +27,7 @@
 .user-name > .content {
   font-size: 16px;
   color: #FAFAFA;
+  text-decoration: none;
 }
 
 .create-chat-btn {
