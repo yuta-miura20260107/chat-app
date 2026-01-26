@@ -12,7 +12,7 @@
       <div class="rooms-container">
         <th:block th:each="room : ${rooms}">
           <div class="room-display">
-            <a class="room-name" th:text="${room.name}">部屋名</a>
+            <a class="room-name" th:text="${room.name}" th:href="@{/rooms/{roomId}/messages(roomId=${room.id})}">部屋名</a>
           </div>
         </th:block>
       </div>

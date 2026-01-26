@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <div th:fragment="main_chat" class="main-chat-container">
   <div class="main-chat-header">
-    <div class="room-title">hogefuga</div>
+    <div class="room-title" th:text="${currentRoom.name}">部屋名</div>
     <button class="chat-close-btn">
       <a class="chat-close-text" href="#">チャットを終了する</a>
     </button>
@@ -11,9 +11,9 @@
     <div th:replace="~{messages_block :: messages_block}"></div>
   </div>
   <div class="chat-form">
-    <form th:action="@{/}" th:method="post" class="form">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" th:method="post" class="form" th:object="${messageForm}">
       <div class="form-input">
-        <input type="text" placeholder="type a message" class="form-message" />
+        <input type="text" placeholder="type a message" class="form-message" th:field="*{content}"/>
         <label>
           <span class="img-file" type="button">画像</span>
           <input type="file" style="display: none;"/>

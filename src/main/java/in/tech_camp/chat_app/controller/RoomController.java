@@ -37,7 +37,7 @@ public class RoomController {
   }
 
   @GetMapping("/rooms/new")
-  public String getMethodName(
+  public String shownNewRoom(
       @AuthenticationPrincipal CustomUserDetail currentUser,
       Model model
   ) {
