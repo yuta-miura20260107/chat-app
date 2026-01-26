@@ -15,12 +15,12 @@
     </th:block>
   </div>
   <div class="chat-form">
-    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" th:method="post" class="form" th:object="${messageForm}">
+    <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" method="post" th:object="${messageForm}" class="form" enctype="multipart/form-data">
       <div class="form-input">
         <input type="text" placeholder="type a message" class="form-message" th:field="*{content}"/>
         <label>
           <span class="img-file" type="button">画像</span>
-          <input type="file" style="display: none;"/>
+          <input type="file" th:field="*{image}" class="hidden" />
         </label>
       </div>
       <input class="form-submit" type="submit" value="送信">  

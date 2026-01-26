@@ -1,5 +1,6 @@
 package in.tech_camp.chat_app.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +27,7 @@ public class MessageController {
 
   private final RoomService roomService;
   private final MessageService messageService;
+
 
   @GetMapping("/message")
   public String showRootMessages(
@@ -78,12 +80,18 @@ public class MessageController {
       BindingResult result,
       Model model
   ) {
+    
+    messageForm.validateMessage(result);
 
     if(result.hasErrors()){
       return "redirect:/rooms/" + roomId + "/messages";
     }
     
-    messageService.postMessage(messageForm, user, roomId);
+    try {
+      messageService.postMessage(messageForm, user, roomId);
+    } catch (IOException e) {
+      return "redirect:/rooms/" + roomId + "/messages";
+    }
     
     return "redirect:/rooms/" + roomId + "/messages";
   }

@@ -6,5 +6,8 @@
     <div class="chat-date" th:text="${#dates.format(message.created_at, 'yyyy/MM/dd(E) HH:mm:ss')}">2040/12/31(Wed) 12:34:56</div>
   </div>
   <div class="chat-content" th:text="${message.content}">こんちくわ</div>
+  <div>
+    <img class="uploaded-image" th:src="@{{link}(link=${message.image})}" />
+  </div>
 </div>
 </html>

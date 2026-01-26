@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -14,6 +15,7 @@ import in.tech_camp.chat_app.entity.MessageEntity;
 public interface MessageRepository {
 
   @Insert("INSERT INTO messages (content, room_id, user_id, image) VALUES (#{content}, #{room.id}, #{user.id}, #{image})")
+  @Options(useGeneratedKeys = true, keyProperty = "id")
   public void insert(MessageEntity message);
 
   @Select("SELECT " 
