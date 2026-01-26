@@ -23,19 +23,17 @@
   color: #333;
 }
 
-.main-chat-header > .chat-close-btn{
+.header-button {
   margin-top: 20px;
-  margin-right: 40px;
-  border: 1px solid darkred;
-  height: fit-content;
-  background-color: transparent;
 }
 
-.chat-close-btn > .chat-close-text {
+.header-button input[type="submit"] {
   text-decoration: none;
-  display: block;
+  border: 1px solid darkred;
   color: darkred;
+  background-color: #fff;
   padding: 20px;
+  cursor: pointer;
 }
 
 /* 

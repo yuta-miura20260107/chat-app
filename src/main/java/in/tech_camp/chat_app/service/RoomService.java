@@ -61,4 +61,12 @@ public class RoomService {
 
     return rooms;
   }
+
+  /**
+   * 削除しますよ
+   * @param roomId
+   */
+  public void closeRoom(Integer roomId) {
+    roomRepository.deleteById(roomId);
+  }
 }
