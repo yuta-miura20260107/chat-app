@@ -10,14 +10,11 @@
     </div>
     <div class="side-bar-main">
       <div class="rooms-container">
-
-        <div class="room-display">
-          <div class="room-name">techroom</div>
-        </div>
-        <div class="room-display">
-          <div class="room-name">techroom2</div>
-        </div>
-        
+        <th:block th:each="room : ${rooms}">
+          <div class="room-display">
+            <a class="room-name" th:text="${room.name}">部屋名</a>
+          </div>
+        </th:block>
       </div>
     </div>
   </div>

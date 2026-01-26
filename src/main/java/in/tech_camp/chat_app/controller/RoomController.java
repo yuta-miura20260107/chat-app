@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import in.tech_camp.chat_app.custom_user.CustomUserDetail;
 import in.tech_camp.chat_app.entity.UserEntity;
 import in.tech_camp.chat_app.form.RoomForm;
+import in.tech_camp.chat_app.service.RoomService;
 import in.tech_camp.chat_app.service.UserService;
 import lombok.AllArgsConstructor;
 
@@ -21,6 +22,19 @@ import lombok.AllArgsConstructor;
 public class RoomController {
 
   private final UserService userService;
+  private final RoomService roomService;
+
+  @GetMapping("/")
+  public String showMessages(
+      @AuthenticationPrincipal CustomUserDetail user,
+      Model model
+  ){
+    var rooms = roomService.getUserRooms(user);
+    model.addAttribute("rooms", rooms);
+    model.addAttribute("currentUserName", user.getName());
+
+    return "rooms/index";
+  }
 
   @GetMapping("/rooms/new")
   public String getMethodName(
@@ -40,6 +54,7 @@ public class RoomController {
       @ModelAttribute("RoomForm") RoomForm roomForm
   ){
     System.out.println("roomForm:"+ roomForm);
+    roomService.createRoom(roomForm);
     return "redirect:/";
   }
 }
