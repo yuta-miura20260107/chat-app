@@ -8,7 +8,9 @@
     </button>
   </div>
   <div class="messages-display">
-    <div th:replace="~{messages_block :: messages_block}"></div>
+    <th:block th:each="message : ${messages}">
+      <th:block th:replace="~{messages_block :: messages_block(${message})}" />
+    </th:block>
   </div>
   <div class="chat-form">
     <form th:action="@{/rooms/{roomId}/messages(roomId=${currentRoom.id})}" th:method="post" class="form" th:object="${messageForm}">

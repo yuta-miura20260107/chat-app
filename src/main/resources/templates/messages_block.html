@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-<div th:fragment="messages_block" class="message-block">
+<div th:fragment="messages_block(message)" class="message-block">
   <div class="chat-info">
-    <div class="chat-user">Tom</div>
-    <div class="chat-date">2040/12/31(Wed) 12:34:56</div>
+    <div class="chat-user" th:text="${message.user.name}">ユーザ名</div>
+    <div class="chat-date" th:text="${message.created_at}">2040/12/31(Wed) 12:34:56</div>
   </div>
-  <div class="chat-content">こんちくわ</div>
+  <div class="chat-content" th:text="${message.content}">こんちくわ</div>
 </div>
 </html>

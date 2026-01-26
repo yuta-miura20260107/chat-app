@@ -1,5 +1,7 @@
 package in.tech_camp.chat_app.controller;
 
+import java.util.List;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import in.tech_camp.chat_app.custom_user.CustomUserDetail;
+import in.tech_camp.chat_app.entity.MessageEntity;
 import in.tech_camp.chat_app.form.MessageForm;
 import in.tech_camp.chat_app.service.MessageService;
 import in.tech_camp.chat_app.service.RoomService;
@@ -58,6 +61,9 @@ public class MessageController {
     model.addAttribute("rooms", rooms);
     model.addAttribute("currentRoom", currentRoom.get());
     model.addAttribute("currentUserName", user.getName());
+
+    List<MessageEntity> messages = messageService.getRoomsMessage(roomId);
+    model.addAttribute("messages", messages);
 
     return "messages/index";
   }

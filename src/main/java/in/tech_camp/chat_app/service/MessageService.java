@@ -1,5 +1,7 @@
 package in.tech_camp.chat_app.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import in.tech_camp.chat_app.custom_user.CustomUserDetail;
@@ -18,9 +20,8 @@ public class MessageService {
 
   public boolean postMessage(MessageForm messageForm, CustomUserDetail currentUser, Integer roomId) {
     
-    UserEntity user = UserEntity.builder()
-        .id(currentUser.getId())
-        .build();
+    UserEntity user = new UserEntity();
+    user.setId(currentUser.getId());
 
     RoomEntity room = new RoomEntity();
     room.setId(roomId);
@@ -34,5 +35,10 @@ public class MessageService {
     messageRepository.insert(message);
 
     return true;
+  }
+
+  public List<MessageEntity> getRoomsMessage(Integer roomId) {
+    List<MessageEntity> messages = messageRepository.findByRoomId(roomId);
+    return messages;
   }
 }
