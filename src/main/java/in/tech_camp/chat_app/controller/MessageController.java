@@ -88,7 +88,7 @@ public class MessageController {
     }
     
     try {
-      messageService.postMessage(messageForm, user, roomId);
+      messageService.postMessage(messageForm, user.getId(), roomId);
     } catch (IOException e) {
       return "redirect:/rooms/" + roomId + "/messages";
     }
