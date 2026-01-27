@@ -35,4 +35,7 @@ public interface MessageRepository {
     @Result(property = "user.name", column = "user_name") 
   })
   public List<MessageEntity> findByRoomId(Integer roomId);
+
+  @Select("SELECT COUNT(*) FROM messages")
+  int count();
 }
