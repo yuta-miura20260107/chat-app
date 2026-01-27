@@ -27,6 +27,7 @@
 .user-name > .content {
   font-size: 16px;
   color: #FAFAFA;
+  text-decoration: none;
 }
 
 .create-chat-btn {
@@ -35,6 +36,7 @@
   border: 1px solid lightblue;
   font-size: 10x;
   padding: 14px;
+  text-decoration: none;
 }
 
 /* サイドバーメイン */
@@ -54,4 +56,6 @@
 .room-name {
   margin: 20px 20px 40px 20px;
   color: white;
+  display: block;
+  text-decoration: none;
 }
